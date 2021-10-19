@@ -3,7 +3,7 @@ import MessageChild from "./MessageChild";
 
 export class Message extends Component {
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <div>
         <div style={styles.divFontSizeInPercent}>
