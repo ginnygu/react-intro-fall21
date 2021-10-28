@@ -1,29 +1,30 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Pokemon from "./components/pokemon/Pokemon";
+import MainPokemon from "./components/MainPokemon/MainPokemon";
+import MainPokemonDetail from "./components/MainPokemon/MainPokemonDetail";
+
 import "./App.css";
 
 export class App extends Component {
-  state = {
-    name: "",
-  };
-
-  async componentDidMount() {
-    try {
-      let result = await axios.get("https://pokeapi.co/api/v2/pokemon/ditto");
-      console.log(result.data);
-      //1. Get the picture to show up
-      //2. Get the abilities to show up
-      //3. HOW CAN YOU MAKE THIS DYNAMIC - YOU WILL NEED AN INPUT and a BUTTON
-      this.setState({
-        name: result.data.name,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   render() {
-    return <div className="App">{this.state.name}</div>;
+    return (
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/abc" render={() => <h1>abc page</h1>} />
+            <Route
+              exact
+              path="/fetch-pokemon/:name"
+              component={MainPokemonDetail}
+            />
+            <Route exact path="/" component={MainPokemon} />
+            <Route render={() => <h1>Not found 404</h1>} />
+          </Switch>
+        </Router>
+      </div>
+    );
   }
 }
 
